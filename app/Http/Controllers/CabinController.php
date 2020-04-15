@@ -10,11 +10,11 @@ class CabinController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return response()->json(Cabin::where('is_deleted', '0')->limit($request->perPage)->offset($request->perPage * ($request->currentPage - 1))->get());
     }
 
     /**
@@ -30,7 +30,7 @@ class CabinController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +41,7 @@ class CabinController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Cabin  $cabin
+     * @param \App\Cabin $cabin
      * @return \Illuminate\Http\Response
      */
     public function show(Cabin $cabin)
@@ -52,7 +52,7 @@ class CabinController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Cabin  $cabin
+     * @param \App\Cabin $cabin
      * @return \Illuminate\Http\Response
      */
     public function edit(Cabin $cabin)
@@ -63,8 +63,8 @@ class CabinController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cabin  $cabin
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Cabin $cabin
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Cabin $cabin)
@@ -75,7 +75,7 @@ class CabinController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Cabin  $cabin
+     * @param \App\Cabin $cabin
      * @return \Illuminate\Http\Response
      */
     public function destroy(Cabin $cabin)

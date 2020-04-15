@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as auth from './modules/auth';
+import * as cabins from './modules/cabins';
 
 Vue.use(Vuex)
 
@@ -24,7 +25,7 @@ const mutations = {
 }
 
 export default new Vuex.Store({
-    modules: {auth},
+    modules: {auth, cabins},
     state,
     mutations
 })

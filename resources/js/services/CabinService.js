@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-    baseURL: 'http://e-hut.test/',
+    baseURL: 'http://e-hut.test/api/',
     withCredentials: false,
     headers: {
         Accept: 'application/json',
@@ -12,7 +12,9 @@ const apiClient = axios.create({
 
 
 export default {
-    fetchCabins() {
-        return apiClient.get('cabins', data)
+    fetchCabins(currentPage, perPage) {
+        return apiClient.get('cabins', {
+            params: {currentPage, perPage}
+        })
     }
 };

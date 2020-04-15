@@ -24,11 +24,9 @@
                         :pagination="{ doubleArrows: false, align: 'center'}"
                         @page-change="pageChange"
                     >
-                        <template #status="data">
+                        <template #actions="data">
                             <td>
-                                <CBadge :color="getBadge(data.item.status)">
-                                    {{data.item.status}}
-                                </CBadge>
+                                <button class="btn btn-primary">Accion</button>
                             </td>
                         </template>
                     </CDataTable>
@@ -39,18 +37,20 @@
 </template>
 
 <script>
-    import usersData from "../users/UsersData";
+    import store from '../../store/index';
+    import {mapState} from "vuex";
 
     export default {
         name: "Cabins",
         data() {
             return {
-                items: usersData,
+                items: [],
                 fields: [
-                    {key: 'username', label: 'Name', _classes: 'font-weight-bold'},
-                    {key: 'registered'},
-                    {key: 'role'},
-                    {key: 'status'}
+                    {key: 'name', label: 'Nombre', _classes: 'font-weight-bold'},
+                    {key: 'min_capacity', label:'Capacidad mínima'},
+                    {key: 'max_capacity', label:'Capacidad máxima'},
+                    {key: 'location', label:'Ubicación'},
+                    {key: 'actions'}
                 ],
                 activePage: 1
             }
@@ -62,6 +62,9 @@
                     if (route.query && route.query.page) {
                         this.activePage = Number(route.query.page)
                     }
+                    store.dispatch('cabins/fetchCabins', this.activePage).then(() => {
+                        this.items = this.cabins.cabins;
+                    });
                 }
             }
         },
@@ -86,6 +89,9 @@
             pageChange(val) {
                 this.$router.push({query: {page: val}})
             }
+        },
+        computed: {
+            ...mapState(['cabins'])
         }
     }
 </script>
