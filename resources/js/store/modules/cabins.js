@@ -10,14 +10,31 @@ export const state = {
 
 export const mutations = {
     SET_CABINS(state, cabins) {
-        state.cabins = cabins;
-    }
+        state.cabins = cabins
+    },
+    SET_CABIN(state, cabin) {
+        state.cabin = cabin
+    },
 }
 
 export const actions = {
     fetchCabins({commit, dispatch, state}, currentPage) {
         return CabinService.fetchCabins(currentPage, state.perPage).then(response => {
             commit('SET_CABINS', response.data)
+        })
+    },
+    fetchCabin({commit, dispatch, state}, id) {
+        return CabinService.fetchCabin(id).then(response => {
+            commit('SET_CABIN', response.data)
+
+            return response.data
+        })
+    },
+    updateCabin({commit, dispatch, state}, {id, data}) {
+        return CabinService.updateCabin(id, data).then(response => {
+            commit('SET_CABIN', response.data)
+
+            return response.data
         })
     }
 }

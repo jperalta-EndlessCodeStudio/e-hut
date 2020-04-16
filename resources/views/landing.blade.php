@@ -12,6 +12,7 @@
 <div id="app">
     <app></app>
 </div>
+<script src="https://kit.fontawesome.com/423f984c5a.js" crossorigin="anonymous"></script>
 <script src="{{ mix('js/bootstrap.js') }}"></script>
 <script src="{{ mix('js/app.js') }}"></script>
 </body>

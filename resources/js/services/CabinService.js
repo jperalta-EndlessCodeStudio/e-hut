@@ -16,5 +16,11 @@ export default {
         return apiClient.get('cabins', {
             params: {currentPage, perPage}
         })
+    },
+    fetchCabin(id) {
+        return apiClient.get(`cabins/${id}`);
+    },
+    updateCabin(id, data) {
+        return apiClient.patch(`cabins/${id}`, {data})
     }
 };

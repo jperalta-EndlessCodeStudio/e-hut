@@ -4,7 +4,9 @@ import Login from "../views/pages/Login";
 import TheContainer from "../containers/TheContainer";
 import Dashboard from "../views/Dashboard";
 import Users from "../views/users/Users";
-import Cabins from "../views/cabins/Cabins";
+import CabinsList from "../views/cabins/List";
+import CabinsEdit from "../views/cabins/Edit";
+import store from "../store/index";
 
 const routes = [
     {
@@ -30,7 +32,22 @@ const routes = [
             {
                 path: 'cabins',
                 name: 'cabins',
-                component: Cabins,
+                component: CabinsList,
+            },
+            {
+                path: 'cabins/:id',
+                name: 'cabins-edit',
+                component: CabinsEdit,
+                props: true,
+                beforeEnter(routeTo, routeFrom, next) {
+                    store.dispatch('cabins/fetchCabin', routeTo.params.id).then((cabin) => {
+                        routeTo.params.cabin = cabin
+
+                        next()
+                    })
+
+
+                },
             },
             {
                 path: 'clients',

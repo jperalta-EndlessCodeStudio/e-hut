@@ -42,11 +42,11 @@ class CabinController extends Controller
      * Display the specified resource.
      *
      * @param \App\Cabin $cabin
-     * @return \Illuminate\Http\Response
+     * @return Cabin
      */
     public function show(Cabin $cabin)
     {
-        //
+        return $cabin;
     }
 
     /**
@@ -65,11 +65,14 @@ class CabinController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Cabin $cabin
-     * @return \Illuminate\Http\Response
+     * @return Cabin
      */
     public function update(Request $request, Cabin $cabin)
     {
-        //
+//        return $request->data;
+        $cabin->update($request->data);
+
+        return $cabin;
     }
 
     /**
